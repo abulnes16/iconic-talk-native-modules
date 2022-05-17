@@ -18,7 +18,6 @@ const Home = () => {
         <MainButton text="Module with Params" />
         <MainButton variant="secondary" text="Module Callback" />
         <MainButton variant="secondary" text="Module Promise" />
-        <MainButton variant="secondary" text="Module Event" />
       </View>
     </View>
   );
