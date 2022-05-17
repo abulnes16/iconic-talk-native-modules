@@ -9,7 +9,7 @@
  */
 
 import React from 'react';
-import { Image, SafeAreaView, StyleSheet } from 'react-native';
+import { Image, ScrollView, StyleSheet } from 'react-native';
 import { ICONIC_BG } from './src/assets';
 
 import Home from './src/screens/home/Home';
@@ -17,14 +17,14 @@ import { colors } from './src/theme';
 
 const App = () => {
   return (
-    <SafeAreaView style={styles.container}>
+    <ScrollView contentContainerStyle={styles.container}>
       <Image style={[styles.iconicBg, styles.iconicTop]} source={ICONIC_BG} />
       <Home />
       <Image
         style={[styles.iconicBg, styles.iconicBottom]}
         source={ICONIC_BG}
       />
-    </SafeAreaView>
+    </ScrollView>
   );
 };
 
