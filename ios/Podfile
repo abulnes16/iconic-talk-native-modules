@@ -3,6 +3,8 @@ require_relative '../node_modules/@react-native-community/cli-platform-ios/nativ
 
 pod 'web3swift'
 
+pod 'secp256k1.c', :modular_headers => true
+
 platform :ios, '11.0'
 
 target 'talk_native_modules' do

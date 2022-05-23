@@ -1,11 +1,23 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
 
 import { MainButton, Logo } from '../../components';
+import { useNativeModule } from '../../hooks';
 
 import { colors, fontSize } from '../../theme';
 
 const Home = () => {
+  const {
+    checkConnection,
+    checkConnectionWithCallback,
+    createWallet,
+    nativeLog,
+    isConnected,
+    isLoading,
+    error,
+    wallet,
+  } = useNativeModule();
+
   return (
     <View>
       <Logo />
@@ -14,10 +26,40 @@ const Home = () => {
         <Text style={styles.subtitle}>on React Native</Text>
       </View>
       <View style={styles.buttonContainer}>
-        <MainButton text="Module without Params" />
-        <MainButton text="Module with Params" />
-        <MainButton variant="secondary" text="Module Callback" />
-        <MainButton variant="secondary" text="Module Promise" />
+        <MainButton text="Module without Params" onPress={checkConnection} />
+        <MainButton
+          text="Module with Params"
+          onPress={() =>
+            nativeLog(
+              'Iconic Talk',
+              'This is a native print with Native Modules',
+            )
+          }
+        />
+        <MainButton
+          variant="secondary"
+          text="Module Callback"
+          onPress={checkConnectionWithCallback}
+        />
+        <MainButton
+          variant="secondary"
+          text="Module Promise"
+          onPress={() => createWallet('password1!')}
+        />
+
+        {isConnected ? (
+          <Text>We have internet connection</Text>
+        ) : (
+          <Text>We don't have internet connection</Text>
+        )}
+
+        {isLoading ? (
+          <ActivityIndicator size="large" />
+        ) : error ? (
+          <Text>We couldn't create the wallet :c </Text>
+        ) : (
+          <Text>{JSON.stringify(wallet)}</Text>
+        )}
       </View>
     </View>
   );
