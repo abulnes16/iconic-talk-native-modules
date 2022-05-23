@@ -54,7 +54,11 @@ const Home = () => {
           <Text>We don't have internet connection</Text>
         )}
         {isLoading ? (
-          <ActivityIndicator size="large" />
+          <ActivityIndicator
+            size="large"
+            color={colors.primary}
+            style={styles.loader}
+          />
         ) : (
           error && <Text>We couldn't create the wallet :c </Text>
         )}
@@ -90,21 +94,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 
-  walletTitle: {
-    fontWeight: 'bold',
-    textAlign: 'center',
-    fontSize: 20,
-  },
-
-  boldText: {
-    fontWeight: 'bold',
+  loader: {
     marginVertical: 10,
-  },
-
-  modal: {
-    backgroundColor: 'white',
-    borderRadius: 20,
-    paddingVertical: 40,
-    paddingHorizontal: 20,
   },
 });
