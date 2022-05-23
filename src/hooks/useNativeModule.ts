@@ -5,6 +5,7 @@ import { Wallet } from '../modules/IconicModule';
 const useNativeModule = () => {
   const [isConnected, setIsConnected] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [showModal, setShowModal] = useState(false);
   const [error, setError] = useState(false);
   const [wallet, setWallet] = useState<Wallet>();
 
@@ -29,6 +30,7 @@ const useNativeModule = () => {
         password,
       );
       setWallet(nativeWallet);
+      setShowModal(true);
     } catch (e) {
       console.log(e);
       setError(true);
@@ -46,6 +48,8 @@ const useNativeModule = () => {
     isLoading,
     error,
     wallet,
+    showModal,
+    setShowModal,
   };
 };
 

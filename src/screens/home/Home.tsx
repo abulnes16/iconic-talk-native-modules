@@ -1,7 +1,7 @@
 import React from 'react';
 import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
 
-import { MainButton, Logo } from '../../components';
+import { MainButton, Logo, WalletModal } from '../../components';
 import { useNativeModule } from '../../hooks';
 
 import { colors, fontSize } from '../../theme';
@@ -16,6 +16,8 @@ const Home = () => {
     isLoading,
     error,
     wallet,
+    showModal,
+    setShowModal,
   } = useNativeModule();
 
   return (
@@ -46,20 +48,21 @@ const Home = () => {
           text="Module Promise"
           onPress={() => createWallet('password1!')}
         />
-
         {isConnected ? (
           <Text>We have internet connection</Text>
         ) : (
           <Text>We don't have internet connection</Text>
         )}
-
         {isLoading ? (
           <ActivityIndicator size="large" />
-        ) : error ? (
-          <Text>We couldn't create the wallet :c </Text>
         ) : (
-          <Text>{JSON.stringify(wallet)}</Text>
+          error && <Text>We couldn't create the wallet :c </Text>
         )}
+        <WalletModal
+          wallet={wallet}
+          visible={showModal}
+          onDismiss={() => setShowModal(false)}
+        />
       </View>
     </View>
   );
@@ -85,5 +88,23 @@ const styles = StyleSheet.create({
   buttonContainer: {
     justifyContent: 'center',
     alignItems: 'center',
+  },
+
+  walletTitle: {
+    fontWeight: 'bold',
+    textAlign: 'center',
+    fontSize: 20,
+  },
+
+  boldText: {
+    fontWeight: 'bold',
+    marginVertical: 10,
+  },
+
+  modal: {
+    backgroundColor: 'white',
+    borderRadius: 20,
+    paddingVertical: 40,
+    paddingHorizontal: 20,
   },
 });
